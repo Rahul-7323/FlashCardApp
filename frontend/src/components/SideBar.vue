@@ -21,7 +21,7 @@ export default {
             </div>
 
             <div class="flex flex-col flex-nowrap gap-y-4">
-                <SideBarItem link="/" name="Dashboard" />
+                <SideBarItem link="/dashboard" name="Dashboard" />
                 <SideBarItem link="/review" name="Review" />
             </div>
         </div>

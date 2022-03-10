@@ -1,3 +1,6 @@
+<script>
+</script>
+
 <template>
     <div class="dropdown dropdown-end">
         <label tabindex="0" class="btn btn-ghost btn-circle avatar">
@@ -19,7 +22,7 @@
                 <a>Settings</a>
             </li>
             <li>
-                <a>Logout</a>
+                <router-link to="/login">Logout</router-link>
             </li>
         </ul>
     </div>

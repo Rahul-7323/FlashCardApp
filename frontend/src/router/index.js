@@ -4,19 +4,22 @@ import Review from '@/views/Review.vue';
 import Page from '@/views/Page.vue';
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
+import Home from '@/views/Home.vue'
 
 const routes = [
+    { path: '/home', name: 'Home', component: Home },
+    { path: '/', redirect: '/home' },
     {
         path: '/',
         name: 'Page',
         component: Page,
         children: [
-            { path: '', name: 'Dashboard', component: Dashboard },
+            { path: 'Dashboard', name: 'Dashboard', component: Dashboard },
             { path: 'review', name: 'Review', component: Review }
         ]
     },
     { path: '/login', name: 'Login', component: Login },
-    { path: '/register', name: 'Register', component: Register }
+    { path: '/register', name: 'Register', component: Register },
 ];
 
 const router = createRouter({
