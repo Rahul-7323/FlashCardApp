@@ -1,18 +1,20 @@
 <script>
 import DashboardCard from '@/components/DashboardCard.vue'
-import DashboardStat from '@/components/DashBoardStat.vue'
-import DashBoardStat from '@/components/DashBoardStat.vue'
+import DashboardStat from '@/components/DashboardStat.vue'
 export default {
     components: {
         DashboardCard,
-        DashBoardStat
+        DashboardStat
     }
 }
 </script>
 
 <template>
-    <div class="flex flex-row flex-wrap justify-evenly gap-4 p-5 rounded-2xl">
-        <DashBoardStat />
+    <div class="flex flex-row flex-wrap justify-around gap-y-10 rounded-2xl">
+        <!-- <DashboardStat /> -->
+        <DashboardCard />
+        <DashboardCard />
+        <DashboardCard />
         <DashboardCard />
     </div>
 </template>

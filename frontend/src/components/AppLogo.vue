@@ -13,7 +13,7 @@ export default {
         <img
             src="/FlashCardApp-logo.png"
             alt="FlashCardApp-logo"
-            class="w-full h-20 object-cover rounded-lg shadow-2xl bg-black"
+            class="w-full h-20 object-cover rounded-lg shadow-xl bg-black"
         />
     </RouterLink>
 </template>

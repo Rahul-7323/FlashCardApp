@@ -4,7 +4,7 @@ import NavBarDropDown from '@/components/NavBarDropDown.vue';
 </script>
 
 <template>
-  <div class="navbar bg-white shadow-2xl rounded-lg sticky top-1 z-50">
+  <div class="navbar bg-base-100 shadow-xl rounded-lg sticky top-1 z-50">
     <div class="flex-none">
       <label for="my-drawer" class="btn btn-square btn-ghost drawer-button">
         <svg

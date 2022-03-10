@@ -1,5 +1,5 @@
 <template>
-    <div class="card w-96 bg-base-100 shadow-lg shadow-blue-300">
+    <div class="card w-96 bg-base-100 shadow-lg dark:shadow-blue-300">
         <figure>
             <img src="https://api.lorem.space/image/shoes?w=400&h=225" alt="Shoes" />
         </figure>

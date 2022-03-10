@@ -15,6 +15,9 @@ export default {
         }
         const htmlElem = document.getElementsByTagName('html')[0];
         htmlElem.setAttribute("data-theme", this.theme);
+        if (this.theme === 'dark') {
+            htmlElem.classList.add("dark")
+        }
     },
     methods: {
         toggleTheme: function () {
@@ -23,6 +26,12 @@ export default {
             const htmlElem = document.getElementsByTagName('html')[0];
             htmlElem.setAttribute("data-theme", this.theme);
             localStorage.flashCardAppTheme = this.theme
+            if (this.theme === 'dark') {
+                htmlElem.classList.add("dark")
+            }
+            else {
+                htmlElem.classList.remove("dark")
+            }
         }
     }
 }
