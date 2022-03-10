@@ -13,14 +13,14 @@ export default {
     <div class="drawer-side">
         <label for="my-drawer" class="drawer-overlay"></label>
         <div
-            class="p-4 overflow-y-auto w-80 bg-slate-100 dark:bg-base-100 text-base-content flex flex-col justify-start flex-nowrap gap-y-16"
+            class="p-4 overflow-y-auto w-80 bg-slate-100 dark:bg-base-100 text-base-content flex flex-col justify-start flex-nowrap gap-y-10"
         >
             <!-- Sidebar content here -->
             <div class="flex flex-col flex-nowrap">
                 <AppLogo />
             </div>
 
-            <div class="flex flex-col flex-nowrap gap-y-4">
+            <div class="flex flex-col flex-nowrap gap-y-6">
                 <SideBarItem link="/dashboard" name="Dashboard" />
                 <SideBarItem link="/review" name="Review" />
             </div>

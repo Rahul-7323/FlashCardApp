@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .cool-shadow {
+    @apply shadow-lg dark:shadow-md dark:shadow-blue-200;
+  }
+}

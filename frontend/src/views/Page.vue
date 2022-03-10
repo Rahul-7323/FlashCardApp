@@ -10,7 +10,7 @@ import SideBar from '@/components/SideBar.vue'
         <div class="drawer-content bg-slate-200 dark:bg-slate-900">
             <!-- Page content here -->
             <div id="main">
-                <div class="flex flex-col justify-start gap-6">
+                <div class="flex flex-col justify-start gap-10">
                     <NavBar />
                     <RouterView />
                 </div>

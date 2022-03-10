@@ -9,5 +9,8 @@ export default {
 </script>
 
 <template>
-    <RouterLink :to="link" class="btn btn-warning shadow-2xl">{{ name }}</RouterLink>
+    <RouterLink
+        :to="link"
+        class="btn shadow-lg btn-info shadow-blue-400 dark:btn-warning dark:shadow-orange-300"
+    >{{ name }}</RouterLink>
 </template>
