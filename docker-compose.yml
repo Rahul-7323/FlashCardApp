@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  flask-app:
+    image: python:3.8-slim-buster
+    command: sh -c "sh setup.sh && sh run.sh"
+    ports:
+      - 5000:5000
+    working_dir: /app
+    volumes:
+      - ./backend/:/app
+
+  vue-app:
+    image: node:lts-alpine
+    command: sh -c "yarn install && chmod -R 777 ./ && yarn dev"
+    ports:
+      - 3000:3000
+    working_dir: /app
+    volumes:
+      - ./frontend/:/app
