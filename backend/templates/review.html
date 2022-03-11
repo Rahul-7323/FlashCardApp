@@ -1,0 +1,88 @@
+{% extends "base.html" %}{% block title %}Review{% endblock %} 
+
+{% block head %}
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename = 'js/review.js') }}"
+></script>
+{% endblock %}
+
+{% block body_content %}
+
+<div class="container w-75" style="margin-top: 60px">
+  {% if card %}
+  <div class="container border border-3 rounded-3 shadow">
+    <div class="container">
+      <h1 style="text-align: center">{{ card.front }}</h1>
+    </div>
+  </div>
+  <div class="container border border-3 rounded-3 shadow">
+    <div class="container">
+      <div class="collapse" id="collapseExample">
+        <h1 style="text-align: center">{{ card.back }}</h1>
+      </div>
+    </div>
+  </div>
+
+  <div id="difficulty" style="display: none">
+    <div
+      class="fixed-bottom container text-center"
+      style="margin-bottom: 180px"
+    >
+      <a
+        href="/deck/{{ deck_id }}/card/{{ card.card_id }}/difficulty/easy"
+        class="btn btn-outline-success"
+        for="btnradio1"
+        >Easy</a
+      >
+
+      <a
+        href="/deck/{{ deck_id }}/card/{{ card.card_id }}/difficulty/medium"
+        class="btn btn-outline-warning"
+        for="btnradio2"
+        >Medium</a
+      >
+
+      <a
+        href="/deck/{{ deck_id }}/card/{{ card.card_id }}/difficulty/hard"
+        class="btn btn-outline-danger"
+        for="btnradio3"
+        >Hard</a
+      >
+    </div>
+    <div
+      class="fixed-bottom container text-center"
+      style="margin-bottom: 130px"
+    >
+      <a
+        href="/deck/{{ deck_id }}/card/{{ card.card_id }}/difficulty/IDK"
+        class="btn btn-outline-dark"
+        for="btnradio1"
+        >Don't Know the Answer</a
+      >
+    </div>
+  </div>
+  <div class="fixed-bottom container" style="margin-bottom: 60px">
+    <div class="text-center">
+      <p>
+        <button
+          class="btn btn-primary"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseExample"
+          aria-expanded="false"
+          aria-controls="collapseExample"
+          id="reveal_answer"
+          onclick="reveal_answer(event)"
+        >
+          Reveal Answer
+        </button>
+      </p>
+    </div>
+  </div>
+  {% else %}
+  <h1>There are no cards, add cards now!</h1>
+  {% endif %}
+</div>
+
+{% endblock %}

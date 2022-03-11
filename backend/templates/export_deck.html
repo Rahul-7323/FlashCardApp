@@ -1,0 +1,16 @@
+{% extends "base.html" %} {% block title %}Export Deck{% endblock %} {% block
+body_content %}
+<div
+  class="container w-50 bg-light bg-gradient border border-3 rounded-3 shadow"
+  style="margin-top: 60px; padding: 20px 20px 20px 20px"
+>
+  <h3>Export Deck(.txt), Compatible with Anki</h3>
+  <br />
+  <a
+    class="btn btn-outline-dark"
+    href="{{ url_for('static', filename = 'files/deck_export.txt') }}"
+    download
+    >Download</a
+  ><br />
+</div>
+{% endblock %}

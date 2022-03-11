@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Import Deck{% endblock %}
+{% block body_content %} {% block head %}
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename = 'js/deck_selected.js') }}"
+></script>
+{% endblock %}
+<div
+  class="container w-50 bg-light bg-gradient border border-3 rounded-3 shadow"
+  style="margin-top: 30px"
+>
+  <h1>Import Deck</h1>
+  <br />
+  <form method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label class="form-label" for="deck_name"
+        >Choose the Deck to which you want to import your cards</label
+      >
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        name="decklist"
+        id="decklist"
+      >
+        <option value="-1">Select a Deck</option>
+        {% for deck in current_user.decks %}
+        <option value="{{ deck.deck_id }}">{{ deck.deck_name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="formFile" class="form-label">Choose the file (.txt)</label>
+      <input class="form-control" type="file" id="formFile" name="file" />
+    </div>
+    <div>
+      <input
+        type="submit"
+        value="Import"
+        class="btn btn-primary"
+        onclick="return check_deck_selected();"
+      />
+    </div>
+  </form>
+  <br />
+  <div
+    id="add_card_success"
+    class="alert alert-warning border-warning"
+    role="alert"
+  >
+    <b>Note</b>: The front and back part should be separated by a semicolon
+    (';')<br />
+    <div style="display: flex; justify-content: center">
+      <img
+        src="{{ url_for('static', filename = 'img/sample_deck.JPG') }}"
+        alt="sample_deck"
+        width="300"
+      />
+    </div>
+  </div>
+</div>
+<script>
+  active_import_deck();
+</script>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %}} {% block
+body_content %} {% if current_user.is_authenticated %}
+<div
+  class="container w-75 bg-light bg-gradient border border-3 rounded-3 shadow"
+  style="margin-top: 50px"
+>
+  <h1>Hello {{ current_user.username }}!</h1>
+  <h1>Go to dashboard and start learning now!</h1>
+</div>
+{% else %}
+<div
+  class="container w-75 bg-light bg-gradient border border-3 rounded-3"
+  style="margin-top: 50px"
+>
+  <h1>Hello, Welcome to Flashcard App!</h1>
+  <h1>Please Login or Register in order to use the app</h1>
+</div>
+{% endif %}
+<script type="text/javascript">
+  active_home();
+</script>
+{% endblock %}

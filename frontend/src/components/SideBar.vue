@@ -23,6 +23,7 @@ export default {
             <div class="flex flex-col flex-nowrap gap-y-6">
                 <SideBarItem link="/dashboard" name="Dashboard" />
                 <SideBarItem link="/review" name="Review" />
+                <SideBarItem link="/add-cards" name="Add Cards" />
             </div>
         </div>
     </div>

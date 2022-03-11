@@ -9,6 +9,7 @@
   "dependencies": {
     "chart.js": "^3.7.1",
     "daisyui": "^2.6.3",
+    "pinia": "^2.0.11",
     "vue": "^3.2.31",
     "vue-router": "^4.0.13"
   },

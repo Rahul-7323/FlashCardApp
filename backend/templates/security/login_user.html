@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% block title %}Register{% endblock %} {% block
+body_content %} {% set form = login_user_form %}
+<div
+  class="container w-50 bg-light bg-gradient border border-3 rounded-3"
+  style="margin-top: 30px"
+>
+  <h1>Login</h1>
+  <br />
+  <form action="/login" method="post" name="login_user_form">
+    {{ form.csrf_token }}
+    <div class="mb-3">
+      {{ form.email.label(class="form-label") }}
+      <div class="">
+        {{ form.email(class="form-control", placeholder="example123@gmail.com")
+        }}
+      </div>
+    </div>
+    <div class="mb-3">
+      {{ form.password.label(class="form-label") }}
+      <div class="">{{ form.password(class="form-control") }}</div>
+    </div>
+    <div>{{ form.submit(class="btn btn-primary") }}</div>
+    <div>{{ form.next }}</div>
+  </form>
+  <br />
+  {% if form.errors != {} %}
+  <div class="alert alert-danger" role="alert">{{form.errors}}</div>
+  {% endif %}
+</div>
+<script type="text/javascript">
+  active_login();
+</script>
+{% endblock %}

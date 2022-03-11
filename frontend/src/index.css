@@ -6,4 +6,8 @@
   .cool-shadow {
     @apply shadow-lg dark:shadow-md dark:shadow-blue-200;
   }
+
+  .cool-bg {
+    @apply bg-slate-200 dark:bg-slate-900;
+  }
 }

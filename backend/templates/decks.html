@@ -1,0 +1,51 @@
+{% extends "base.html" %} {% block title %}Decks{% endblock %} {% block
+body_content %} {% if current_user.decks == [] %}
+<div
+  class="container w-50 bg-light bg-gradient border border-3 rounded-3"
+  style="margin-top: 30px"
+>
+  <h1>There are no decks added, add decks now!</h1>
+</div>
+{% else %}
+<div class="container w-75" style="margin-top: 30px">
+  <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-bottom: 30px">
+    {% for deck in current_user.decks %}
+    <div class="col">
+      <div class="card border border-3 rounded-3 shadow">
+        <div class="card-body">
+          <h5 class="card-title">{{ deck.deck_name }}</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              Number of cards: {{ deck.cards|count }}
+            </li>
+            <li class="list-group-item">
+              <a href="/decks/review/{{ deck.deck_id }}/{{ deck.deck_name }}"
+                >Review</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a href="/decks/cards/{{ deck.deck_id }}/{{ deck.deck_name }}"
+                >Cards</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a href="/decks/delete_deck/{{ deck.deck_id }}">Delete Deck</a>
+            </li>
+            <li class="list-group-item">
+              <a
+                href="/decks/export_deck/{{ deck.deck_id }}/{{ deck.deck_name }}"
+                >Export Deck</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+<script type="text/javascript">
+  active_decks();
+</script>
+{% endblock %}
