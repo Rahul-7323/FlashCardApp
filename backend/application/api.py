@@ -2,12 +2,13 @@ from sqlalchemy import and_
 from flask_restful import (
     Resource,
     fields,
+    marshal,
     marshal_with,
     reqparse,
     abort
 )
 
-from flask import request
+from flask import request, jsonify
 from .database import db
 from .models import User, Deck, Card
 from .validations import APIError
@@ -18,6 +19,7 @@ regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 
 
 user_fields = {
+    "id" : fields.Integer,
     "username" : fields.String,
     "email" : fields.String
 }
@@ -172,6 +174,18 @@ def validate_difficulty(difficulty):
 
 
 # API Resources
+class UserDataAPI(Resource):
+    def get(self,user_id):
+        user = get_user(user_id)
+        abort_if_not_found(user)
+        user_data = {}
+        user_data["user"] = marshal(user, user_fields)
+        user_data["decks"] = marshal(user.decks, deck_fields)
+        user_data["cards"] = []
+        for deck in user.decks:
+            user_data["cards"].extend(marshal(deck.cards, card_fields))
+        return user_data, 200
+
 class UserAPI(Resource):
     @marshal_with(user_fields)
     def get(self):

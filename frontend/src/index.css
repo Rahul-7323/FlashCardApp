@@ -10,4 +10,12 @@
   .cool-bg {
     @apply bg-slate-200 dark:bg-slate-900;
   }
+
+  .app-card {
+    @apply bg-base-100 rounded-xl p-5;
+  }
+
+  .hover-ring {
+    @apply hover:bg-indigo-700 hover:outline-none hover:ring-2 hover:ring-offset-2 hover:ring-indigo-500;
+  }
 }

@@ -12,6 +12,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String, unique = True, nullable = False)
     password = db.Column(db.String, nullable = False)
     active = db.Column(db.Boolean)
+    fs_uniquifier = db.Column(db.String(255), unique=True, nullable=False)
     roles = db.relationship('Role', secondary = roles_users, backref = db.backref('user', lazy = 'dynamic'))
     decks = db.relationship('Deck', backref = 'user', cascade = "all, delete")
 

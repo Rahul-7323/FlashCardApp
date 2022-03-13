@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_restful import Api
+from flask_cors import CORS
 from application.config import Config
 from application.database import db
 from application.models import User, Role
@@ -13,7 +14,8 @@ from application.api import (
     CardAPI,
     DeckLastReviewTimeAPI,
     CardDifficultyAPI,
-    DeckTotalScoreAPI
+    DeckTotalScoreAPI,
+    UserDataAPI
 )
 
 from flask_security import Security, SQLAlchemySessionUserDatastore
@@ -29,6 +31,7 @@ def create_app():
     db.init_app(app)
     api = Api(app)
     app.app_context().push()
+    db.create_all()
     user_datastore = SQLAlchemySessionUserDatastore(
         session=db.session, user_model=User, role_model=Role)
     security = Security(app, user_datastore,
@@ -37,9 +40,11 @@ def create_app():
 
 
 app, api, security, user_datastore = create_app()
+CORS(app)
 
 from application.controllers import *
 
+api.add_resource(UserDataAPI, "/api/user_data/<int:user_id>")
 api.add_resource(UserAPI, "/api/user", "/api/user/<int:user_id>")
 api.add_resource(UserDecksAPI, "/api/deck/user/<int:user_id>")
 api.add_resource(DeckAPI, "/api/deck", "/api/deck/<int:deck_id>")

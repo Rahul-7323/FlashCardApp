@@ -5,6 +5,7 @@ import Page from '@/views/Page.vue';
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import Home from '@/views/Home.vue'
+import Decks from '@/views/Decks.vue'
 
 const routes = [
     { path: '/home', name: 'Home', component: Home },
@@ -15,7 +16,8 @@ const routes = [
         component: Page,
         children: [
             { path: 'Dashboard', name: 'Dashboard', component: Dashboard },
-            { path: 'review', name: 'Review', component: Review }
+            { path: 'review', name: 'Review', component: Review },
+            { path: 'decks', name: 'Decks', component: Decks }
         ]
     },
     { path: '/login', name: 'Login', component: Login },

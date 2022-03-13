@@ -1,10 +1,17 @@
 <script setup>
 import { RouterView } from 'vue-router';
+import { useUserStore } from '@/stores/UserStore';
 import NavBar from '@/components/NavBar.vue'
 import SideBar from '@/components/SideBar.vue'
+import AppAlertList from '@/components/AppAlertList.vue'
+
+const UserStore = useUserStore()
+UserStore.fetchData();
+
 </script>
 
 <template>
+    <AppAlertList />
     <div class="drawer h-screen drawer-mobile w-full rounded">
         <input id="my-drawer" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content bg-slate-200 dark:bg-slate-900">

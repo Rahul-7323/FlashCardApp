@@ -1,37 +1,15 @@
 <script>
+import { useAppStore } from "@/stores/AppStore"
+
 export default {
+    setup() {
+        const AppStore = useAppStore();
+        return { toggleTheme: AppStore.toggleTheme, theme: AppStore.theme }
+    },
     data() {
         return {
-            theme: 'light'
-        }
-    },
-    mounted() {
-        if (localStorage.flashCardAppTheme) {
-            this.theme = localStorage.flashCardAppTheme
-        }
-        else {
-            this.theme = 'dark'
-            localStorage.flashCardAppTheme = this.theme
-        }
-        const htmlElem = document.getElementsByTagName('html')[0];
-        htmlElem.setAttribute("data-theme", this.theme);
-        if (this.theme === 'dark') {
-            htmlElem.classList.add("dark")
-        }
-    },
-    methods: {
-        toggleTheme: function () {
-            this.theme = this.theme === 'dark' ? 'light' : 'dark';
-            console.log(this.theme);
-            const htmlElem = document.getElementsByTagName('html')[0];
-            htmlElem.setAttribute("data-theme", this.theme);
-            localStorage.flashCardAppTheme = this.theme
-            if (this.theme === 'dark') {
-                htmlElem.classList.add("dark")
-            }
-            else {
-                htmlElem.classList.remove("dark")
-            }
+            onClass: "swap-off",
+            offClass: "swap-on"
         }
     }
 }
@@ -44,7 +22,8 @@ export default {
 
         <!-- sun icon -->
         <svg
-            class="swap-on fill-current w-8 h-8"
+            :class="(theme === 'light') ? onClass : offClass"
+            class="fill-current w-8 h-8"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
         >
@@ -55,7 +34,8 @@ export default {
 
         <!-- moon icon -->
         <svg
-            class="swap-off fill-current w-8 h-8"
+            :class="(theme === 'dark') ? onClass : offClass"
+            class="fill-current w-8 h-8"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
         >

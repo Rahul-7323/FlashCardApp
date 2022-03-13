@@ -1,3 +1,40 @@
+<script>
+import { useUserStore } from "@/stores/UserStore";
+import LoadingSpinner from "@/components/LoadingSpinner.vue";
+
+export default {
+    components: {
+        LoadingSpinner,
+    },
+    setup() {
+        const UserStore = useUserStore();
+        return { UserStore }
+    },
+    data() {
+        return {
+            showLoadingIcon: true,
+        }
+    },
+    computed: {
+        decks() {
+            return this.UserStore.decks;
+        },
+    },
+    mounted() {
+        const self = this;
+        const handler = setInterval(() => {
+            if (self.decks.length > 0) {
+                self.showLoadingIcon = false;
+            }
+        })
+        setTimeout(() => {
+            clearInterval(handler);
+            this.showLoadingIcon = false;
+        }, 3000)
+    }
+}
+</script>
+
 <template>
     <div class="bg-base-100 p-5 rounded-xl cool-shadow">
         <div class="relative h-full">
@@ -7,54 +44,31 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Name</th>
-                            <th>Job</th>
-                            <th>Favorite Color</th>
+                            <th>Deck Name</th>
+                            <th>Last Review Time</th>
+                            <th>Total Score</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- row 1 -->
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Blue</td>
-                        </tr>
-                        <!-- row 2 -->
-                        <tr class="hover">
-                            <th>2</th>
-                            <td>Hart Hagerty</td>
-                            <td>Desktop Support Technician</td>
-                            <td>Purple</td>
-                        </tr>
-                        <!-- row 3 -->
-                        <tr>
-                            <th>3</th>
-                            <td>Brice Swyre</td>
-                            <td>Tax Accountant</td>
-                            <td>Red</td>
-                        </tr>
-                        <tr>
-                            <th>3</th>
-                            <td>Brice Swyre</td>
-                            <td>Tax Accountant</td>
-                            <td>Red</td>
-                        </tr>
-                        <tr>
-                            <th>3</th>
-                            <td>Brice Swyre</td>
-                            <td>Tax Accountant</td>
-                            <td>Red</td>
-                        </tr>
-                        <tr>
-                            <th>3</th>
-                            <td>Brice Swyre</td>
-                            <td>Tax Accountant</td>
-                            <td>Red</td>
+                        <tr v-for="(deck, index) in decks" class="hover">
+                            <th>{{ index + 1 }}</th>
+                            <td>{{ deck.deck_name }}</td>
+                            <td>{{ deck.last_review_time }}</td>
+                            <td>{{ deck.total_score }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+            <div
+                v-if="showLoadingIcon"
+                class="h-full w-full flex flex-col justify-center text-center text-2xl"
+            >
+                <LoadingSpinner class="m-auto" />
+            </div>
+            <div
+                v-else-if="decks.length == 0"
+                class="h-full w-full flex flex-col justify-center text-center text-2xl"
+            >There are no decks!</div>
         </div>
     </div>
 </template>
