@@ -1,11 +1,14 @@
 <script setup>
 import NavBarSwapIcon from '@/components/NavBarSwapIcon.vue';
 import NavBarDropDown from '@/components/NavBarDropDown.vue';
+import { useAppStore } from '@/stores/AppStore'
+
+const AppStore = useAppStore();
 </script>
 
 <template>
   <div class="navbar bg-base-100 shadow-xl rounded-lg sticky top-1 z-20">
-    <div class="flex-none">
+    <div class="flex-none" @click="AppStore.toggleShowSidebar">
       <label for="my-drawer" class="btn btn-square btn-ghost drawer-button">
         <svg
           xmlns="http://www.w3.org/2000/svg"

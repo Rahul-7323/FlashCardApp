@@ -6,6 +6,7 @@ export const useAppStore = defineStore("App", {
             theme: '',
             alerts: [],
             alertCount: 0,
+            showSidebar: true,
         }
     },
     getters: {
@@ -51,6 +52,9 @@ export const useAppStore = defineStore("App", {
                     this.alerts[i].dismissed = true;
                 }
             }
+        },
+        toggleShowSidebar() {
+            this.showSidebar = !this.showSidebar;
         }
     }
 })
