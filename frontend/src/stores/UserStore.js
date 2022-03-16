@@ -27,14 +27,14 @@ export const useUserStore = defineStore("UserStore", {
                 this.cards = data.cards;
                 AppStore.pushAlert({
                     type: 'success',
-                    message: 'Successfully fetched the data from the API!'
+                    message: 'Successfully fetched the data from the API'
                 });
             }
             catch {
                 this.dataFetched = false;
                 AppStore.pushAlert({
                     type: 'error',
-                    message: 'Unable to fetch data from the API!'
+                    message: 'Unable to fetch data from the API'
                 });
             }
         },

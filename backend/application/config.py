@@ -16,3 +16,5 @@ class Config:
     SECRET_KEY = "k'u8Sj>VmmG,$'X!tAA&{A,iDBt?9D8~J7!3O[yKW8XU|{dlZ:k|ZTZI},BCg"
     SECURITY_PASSWORD_SALT = "u@8(YLSt<UB6eNsn={SHbd9ZA*[]I}cI!*|X8]J#O:|.>RZ7DQe>9(mUw.a8d"
     ############################################################################################### 
+    CELERY_BROKER_URL = 'http://127.0.0.1:6379/1'
+    CELERY_RESULT_BACKEND = 'http://127.0.0.1:6379/2'

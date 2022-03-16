@@ -47,11 +47,10 @@ export const useAppStore = defineStore("App", {
             this.alertCount++;
         },
         dismissAlert(id) {
-            for (let i = 0; i < this.alerts.length; i++) {
-                if (this.alerts[i].id == id) {
-                    this.alerts[i].dismissed = true;
-                }
-            }
+            this.alerts.forEach(alert => {
+                if (alert.id == id)
+                    alert.dismissed = true;
+            });
         },
         toggleShowSidebar() {
             this.showSidebar = !this.showSidebar;

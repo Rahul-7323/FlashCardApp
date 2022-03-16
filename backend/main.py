@@ -5,6 +5,7 @@ from application.config import Config
 from application.database import db
 from application.models import User, Role
 from application.forms import ExtendedRegisterForm
+from application import workers
 
 from application.api import (
     UserAPI,
@@ -23,6 +24,7 @@ from flask_security import Security, SQLAlchemySessionUserDatastore
 
 app = None
 api = None
+celery = None
 
 
 def create_app():
@@ -36,10 +38,22 @@ def create_app():
         session=db.session, user_model=User, role_model=Role)
     security = Security(app, user_datastore,
                         register_form=ExtendedRegisterForm)
-    return (app, api, security, user_datastore)
+    # Create the celery instance
+    celery = workers.celery
+    
+    # Update celery with the configuration
+    celery.conf.update(
+        broker_url = app.config["CELERY_BROKER_URL"],
+        result_backend = app.config["CELERY_RESULT_BACKEND"]
+    )
+    
+    celery.Task = workers.ContextTask
+    app.app_context().push()
+    
+    return app, api, celery
 
 
-app, api, security, user_datastore = create_app()
+app, api, celery = create_app()
 CORS(app)
 
 from application.controllers import *

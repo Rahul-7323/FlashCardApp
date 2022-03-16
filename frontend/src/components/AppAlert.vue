@@ -19,6 +19,11 @@ export default {
                 'alert-success': this.alertType == 'success',
             };
         }
+    },
+    mounted() {
+        setTimeout(() => {
+            this.$emit('dismissAlert', this.id);
+        },5000)
     }
 }
 
