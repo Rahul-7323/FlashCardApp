@@ -10,7 +10,11 @@ class Config:
     SECURITY_REGISTERABLE = True
     SECURITY_SEND_REGISTER_EMAIL = False
     SECURITY_UNAUTHORIZED_VIEW = None
+    SECURITY_USERNAME_ENABLE = True
+    SECURITY_REDIRECT_BEHAVIOR = 'spa'
+    WTF_CSRF_CHECK_DEFAULT = False
     UPLOAD_FOLDER = os.path.join(basedir, '../static/files')
+    SECURITY_TOKEN_AUTHENTICATION_HEADER = "Authentication-Token"
     # Read the below values from environment variables for production
     ###############################################################################################
     SECRET_KEY = "k'u8Sj>VmmG,$'X!tAA&{A,iDBt?9D8~J7!3O[yKW8XU|{dlZ:k|ZTZI},BCg"

@@ -69,7 +69,7 @@ app.register_blueprint(sse, url_prefix='/stream')
 from application.controllers import *
 
 api.add_resource(UserDataAPI, "/api/user_data/<int:user_id>")
-api.add_resource(UserAPI, "/api/user", "/api/user/<int:user_id>")
+api.add_resource(UserAPI, "/api/user/<int:user_id>")
 api.add_resource(UserDecksAPI, "/api/deck/user/<int:user_id>")
 api.add_resource(DeckAPI, "/api/deck", "/api/deck/<int:deck_id>")
 api.add_resource(DeckCardsAPI, "/api/card/deck/<int:deck_id>")

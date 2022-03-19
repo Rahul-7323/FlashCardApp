@@ -16,6 +16,13 @@ class User(db.Model, UserMixin):
     roles = db.relationship('Role', secondary = roles_users, backref = db.backref('user', lazy = 'dynamic'))
     decks = db.relationship('Deck', backref = 'user', cascade = "all, delete")
 
+    def get_security_payload(self):
+        return {
+            "id":self.id,
+            "username":self.username,
+            "email":self.email
+        }
+
 class Role(db.Model, RoleMixin):
     __tablename__ = 'role'
     id = db.Column(db.Integer, primary_key = True)

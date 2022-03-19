@@ -176,6 +176,7 @@ def validate_difficulty(difficulty):
 
 # API Resources
 class UserDataAPI(Resource):
+    @auth_required('token')
     def get(self,user_id):
         user = get_user(user_id)
         abort_if_not_found(user)
@@ -188,18 +189,14 @@ class UserDataAPI(Resource):
         return user_data, 200
 
 class UserAPI(Resource):
+    @auth_required('token')
     @marshal_with(user_fields)
-    def get(self):
-        auth_token = request.args['auth_token']
-        if auth_token == 'secret':
-            users = User.query.all()
-            return users
-        raise APIError(
-            status_code=403,
-            error_code="AUTH_ERR_01",
-            error_message="invalid authentication token"
-        )
+    def get(self, user_id):
+        user = get_user(user_id)
+        abort_if_not_found(user)
+        return user
 
+    @auth_required('token')
     def delete(self, user_id):
         user = get_user(user_id)
         abort_if_not_found(user)
@@ -208,6 +205,7 @@ class UserAPI(Resource):
         return {"message" : "Successfully Deleted"}, 200
 
 class UserDecksAPI(Resource):
+    @auth_required('token')
     @marshal_with(deck_fields)
     def get(self, user_id):
         user = get_user(user_id)
@@ -217,12 +215,14 @@ class UserDecksAPI(Resource):
 
 
 class DeckAPI(Resource):
+    @auth_required('token')
     @marshal_with(deck_fields)
     def get(self, deck_id = None):
         deck = get_deck(deck_id)
         abort_if_not_found(deck)
         return deck
 
+    @auth_required('token')
     @marshal_with(deck_fields)
     def put(self, deck_id):
         deck = get_deck(deck_id)
@@ -240,6 +240,7 @@ class DeckAPI(Resource):
         db.session.commit()
         return deck
 
+    @auth_required('token')
     def delete(self, deck_id):
         deck = get_deck(deck_id)
         abort_if_not_found(deck)
@@ -247,6 +248,7 @@ class DeckAPI(Resource):
         db.session.commit()
         return {"message": "Successfully Deleted"}, 200
 
+    @auth_required('token')
     @marshal_with(deck_fields)
     def post(self):
         args = create_deck_parser.parse_args()
@@ -284,6 +286,7 @@ class DeckAPI(Resource):
 
 
 class DeckCardsAPI(Resource):
+    @auth_required('token')
     @marshal_with(card_fields)
     def get(self, deck_id):
         deck = get_deck(deck_id)
@@ -293,12 +296,14 @@ class DeckCardsAPI(Resource):
 
 
 class CardAPI(Resource):
+    @auth_required('token')
     @marshal_with(card_fields)
     def get(self, card_id):
         card = get_card(card_id)
         abort_if_not_found(card)
         return card
 
+    @auth_required('token')
     @marshal_with(card_fields)
     def put(self, card_id):
         card = get_card(card_id)
@@ -316,6 +321,7 @@ class CardAPI(Resource):
         db.session.commit()
         return card
 
+    @auth_required('token')
     def delete(self, card_id):
         card = get_card(card_id)
         abort_if_not_found(card)
@@ -323,6 +329,7 @@ class CardAPI(Resource):
         db.session.commit()
         return {"message": "Successfully Deleted"}, 200
 
+    @auth_required('token')
     @marshal_with(card_fields)
     def post(self):
         args = create_card_parser.parse_args()
@@ -351,6 +358,7 @@ class CardAPI(Resource):
         return card, 201
 
 class DeckLastReviewTimeAPI(Resource):
+    @auth_required('token')
     @marshal_with(deck_fields)
     def put(self,deck_id):
         deck = get_deck(deck_id)
@@ -363,6 +371,7 @@ class DeckLastReviewTimeAPI(Resource):
         return deck
 
 class CardDifficultyAPI(Resource):
+    @auth_required('token')
     @marshal_with(card_fields)
     def put(self,card_id):
         card = get_card(card_id)
@@ -375,6 +384,7 @@ class CardDifficultyAPI(Resource):
         return card
 
 class DeckTotalScoreAPI(Resource):
+    @auth_required('token')
     @marshal_with(deck_fields)
     def put(self,deck_id):
         deck = get_deck(deck_id)
