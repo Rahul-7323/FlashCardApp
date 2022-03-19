@@ -8,7 +8,8 @@ from flask_restful import (
     abort
 )
 
-from flask import request, jsonify
+from flask import request
+from flask_security import auth_required
 from .database import db
 from .models import User, Deck, Card
 from .validations import APIError

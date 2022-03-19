@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restful import Api
 from flask_cors import CORS
+from flask_sse import sse
 from application.config import Config
 from application.database import db
 from application.models import User, Role
@@ -30,22 +31,29 @@ celery = None
 def create_app():
     app = Flask(__name__, template_folder="templates")
     app.config.from_object(Config)
+    app.app_context().push()
     db.init_app(app)
+    app.app_context().push()
     api = Api(app)
     app.app_context().push()
     db.create_all()
+    app.app_context().push()
     user_datastore = SQLAlchemySessionUserDatastore(
         session=db.session, user_model=User, role_model=Role)
+    app.app_context().push()
     security = Security(app, user_datastore,
                         register_form=ExtendedRegisterForm)
+    app.app_context().push()
     # Create the celery instance
     celery = workers.celery
+    app.app_context().push()
     
     # Update celery with the configuration
     celery.conf.update(
         broker_url = app.config["CELERY_BROKER_URL"],
         result_backend = app.config["CELERY_RESULT_BACKEND"]
     )
+    app.app_context().push()
     
     celery.Task = workers.ContextTask
     app.app_context().push()
@@ -55,6 +63,8 @@ def create_app():
 
 app, api, celery = create_app()
 CORS(app)
+
+app.register_blueprint(sse, url_prefix='/stream')
 
 from application.controllers import *
 

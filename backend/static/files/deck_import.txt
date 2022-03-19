@@ -1,9 +1,0 @@
-front;back
-English;ஆங்கிலம்
-Hello;வணக்கம்
-How are you?;நீங்கள் எப்படி இருக்கிறீர்கள்?
-Thank you;நன்றி
-I like to watch movies;எனக்கு திரைப்படம் பார்ப்பது பிடிக்கும்
-How is your family?;உங்கள் குடும்பம் எப்படி இருக்கிறது?
-Science and Mathematics are my favorite subjects;அறிவியல் மற்றும் கணிதம் எனக்கு பிடித்த பாடங்கள்
-What time is it now;இப்பொழுது நேரம் என்ன
