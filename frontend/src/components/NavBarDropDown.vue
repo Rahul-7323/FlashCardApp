@@ -1,4 +1,7 @@
-<script>
+<script setup>
+import { useAuthStore } from '@/stores/AuthStore';
+
+const AuthStore = useAuthStore();
 </script>
 
 <template>
@@ -13,16 +16,10 @@
             class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
         >
             <li>
-                <a class="justify-between">
-                    Profile
-                    <span class="badge">New</span>
-                </a>
+                <router-link to="/userinfo">User Info</router-link>
             </li>
             <li>
-                <a>Settings</a>
-            </li>
-            <li>
-                <router-link to="/login">Logout</router-link>
+                <router-link to="/login" @click="AuthStore.logout()">Logout</router-link>
             </li>
         </ul>
     </div>

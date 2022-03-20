@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restful import Api
 from flask_cors import CORS
 from flask_sse import sse
+import flask_wtf
 from application.config import Config
 from application.database import db
 from application.models import User, Role
@@ -62,6 +63,7 @@ def create_app():
 
 
 app, api, celery = create_app()
+flask_wtf.CSRFProtect(app)
 CORS(app)
 
 app.register_blueprint(sse, url_prefix='/stream')

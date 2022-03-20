@@ -1,12 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from '@/views/Dashboard.vue';
-import Review from '@/views/Review.vue';
 import Page from '@/views/Page.vue';
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import Home from '@/views/Home.vue'
 import Decks from '@/views/Decks.vue'
+import AddDeck from '@/views/AddDeck.vue';
+import AddCard from '@/views/AddCard.vue';
 import { useAuthStore } from '@/stores/AuthStore';
+import UserInfo from '@/views/UserInfo.vue';
 
 
 const routes = [
@@ -19,12 +21,15 @@ const routes = [
         meta: { requiresAuth: true },
         children: [
             { path: 'Dashboard', name: 'Dashboard', component: Dashboard },
-            { path: 'review', name: 'Review', component: Review },
-            { path: 'decks', name: 'Decks', component: Decks }
+            { path: 'decks', name: 'Decks', component: Decks },
+            { path: 'userinfo', name: 'UserInfo', component: UserInfo },
+            { path: 'add-deck', name: 'Add Deck', component: AddDeck },
+            { path: 'add-card', name: 'Add Card', component: AddCard },
         ]
     },
     { path: '/login', name: 'Login', component: Login },
     { path: '/register', name: 'Register', component: Register },
+    { path: '/:pathMatch(.*)*', redirect: '/home' },
 ];
 
 const router = createRouter({
@@ -32,13 +37,17 @@ const router = createRouter({
     routes
 });
 
-router.beforeEach((to, from) => {
+router.beforeEach( (to, from) => {
     const AuthStore = useAuthStore();
     if (to.meta.requiresAuth && !AuthStore.isAuthenticated) {
         return {
             path: '/login',
-            // save the location we were at to come back later
-            query: { redirect: to.fullPath },
+        }
+    }
+    else if((to.name == 'Login' || to.name == 'Register') && AuthStore.isAuthenticated){
+        console.log("Already Authenticated");
+        return {
+            path: '/dashboard'
         }
     }
     return true;

@@ -13,6 +13,11 @@ class Config:
     SECURITY_USERNAME_ENABLE = True
     SECURITY_REDIRECT_BEHAVIOR = 'spa'
     WTF_CSRF_CHECK_DEFAULT = False
+    SECURITY_CSRF_PROTECT_MECHANISMS = ["session", "basic"]
+    SECURITY_CSRF_IGNORE_UNAUTH_ENDPOINTS = True
+    SECURITY_CSRF_COOKIE_NAME = "XSRF-TOKEN"
+    WTF_CSRF_CHECK_DEFAULT = False
+    WTF_CSRF_TIME_LIMIT = None
     UPLOAD_FOLDER = os.path.join(basedir, '../static/files')
     SECURITY_TOKEN_AUTHENTICATION_HEADER = "Authentication-Token"
     # Read the below values from environment variables for production

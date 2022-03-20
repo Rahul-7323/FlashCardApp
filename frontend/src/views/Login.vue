@@ -16,13 +16,50 @@
 -->
 <script>
 import { LockClosedIcon } from '@heroicons/vue/solid'
-import { RouterLink } from 'vue-router'
+import { RouterLink, onBeforeRouteLeave } from 'vue-router'
+import { useAuthStore } from '@/stores/AuthStore'
 
 export default {
+    setup(){
+        const AuthStore = useAuthStore();
+        return { AuthStore }
+    },
     components: {
         LockClosedIcon,
         RouterLink
     },
+    data() {
+        return {
+            email: '',
+            password: '',
+        }
+    },
+    methods: {
+        async login() {
+            if(!this.email){
+                alert("Email required")
+                return false;
+            }
+            if(!this.password){
+                alert("Password required")
+                return false
+            }
+            await this.AuthStore.login(this.email, this.password);
+            if(this.AuthStore.isAuthenticated){
+                this.$router.push('/dashboard');
+            }
+        }
+    },
+    computed: {
+        loginErrors() {
+            return this.AuthStore.loginErrors;
+        }
+    },
+    mounted() {
+        if(this.AuthStore.isAuthenticated){
+            this.$router.push('/dashboard');
+        }
+    }
 }
 </script>
 
@@ -49,7 +86,6 @@ export default {
                     class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-slate-100"
                 >Login to your account</h2>
             </div>
-            <form class="mt-8 space-y-6" action="#" method="POST">
                 <input type="hidden" name="remember" value="true" />
                 <div class="rounded-md shadow-sm -space-y-px">
                     <div>
@@ -62,6 +98,7 @@ export default {
                             required
                             class="text-gray-900 dark:text-slate-100 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 bg-base-100 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                             placeholder="Email address"
+                            v-model="email"
                         />
                     </div>
                     <div>
@@ -74,24 +111,27 @@ export default {
                             required
                             class="text-gray-900 dark:text-slate-100 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 bg-base-100 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                             placeholder="Password"
+                            v-model="password"
                         />
                     </div>
                 </div>
 
-                <div>
-                    <RouterLink
-                        to="/dashboard"
-                        name="Dashboard"
-                        type="submit"
+                <div @click="login()">
+                    <button
                         class="btn shadow-md btn-info shadow-blue-400 dark:btn-warning dark:shadow-orange-300 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-black"
                     >
                         <span class="absolute left-0 inset-y-0 flex items-center pl-3">
                             <LockClosedIcon class="h-5 w-5 text-black" aria-hidden="true" />
                         </span>
                         Login
-                    </RouterLink>
+                    </button>
                 </div>
-            </form>
+                <div class="ml-4 flex-shrink-0 self-center">or
+                  <router-link to="/register" class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-blue-400 dark:hover:text-blue-500"> Register </router-link>
+                </div>
+                <div>
+                    <div class="alert alert-error rounded-none shadow-lg" v-for="[key,value] in Object.entries(loginErrors)">{{ key }} : {{ value }}</div>
+                </div>
         </div>
     </div>
 </template>

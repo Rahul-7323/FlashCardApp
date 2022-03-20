@@ -23,7 +23,7 @@ onMounted(() => {
         state.screenWidth = window.innerWidth;
         if (window.innerWidth > 1024) {
             const elem = document.getElementsByClassName('drawer-toggle');
-            if (elem) {
+            if (elem[0]) {
                 elem[0].checked = false;
             }
         }
