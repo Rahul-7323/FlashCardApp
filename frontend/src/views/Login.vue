@@ -42,12 +42,13 @@ export default {
             }
             if(!this.password){
                 alert("Password required")
-                return false
+                return false;
             }
             await this.AuthStore.login(this.email, this.password);
             if(this.AuthStore.isAuthenticated){
                 this.$router.push('/dashboard');
             }
+            return true;
         }
     },
     computed: {

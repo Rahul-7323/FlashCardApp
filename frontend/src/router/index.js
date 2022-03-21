@@ -9,6 +9,7 @@ import AddDeck from '@/views/AddDeck.vue';
 import AddCard from '@/views/AddCard.vue';
 import { useAuthStore } from '@/stores/AuthStore';
 import UserInfo from '@/views/UserInfo.vue';
+import DeckCards from '@/views/DeckCards.vue';
 
 
 const routes = [
@@ -22,6 +23,7 @@ const routes = [
         children: [
             { path: 'Dashboard', name: 'Dashboard', component: Dashboard },
             { path: 'decks', name: 'Decks', component: Decks },
+            { path: 'decks/:id', name: 'Deck Cards', component: DeckCards },
             { path: 'userinfo', name: 'UserInfo', component: UserInfo },
             { path: 'add-deck', name: 'Add Deck', component: AddDeck },
             { path: 'add-card', name: 'Add Card', component: AddCard },

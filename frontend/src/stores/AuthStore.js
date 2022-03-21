@@ -69,7 +69,7 @@ export const useAuthStore = defineStore("Auth", {
                 .catch(err => {
                 console.error(err);
                 });
-
+            return true;
         },
         async login(email, password){
             this.loginErrors = {};
@@ -80,7 +80,7 @@ export const useAuthStore = defineStore("Auth", {
                 csrf_token: this.csrfToken
             };
             console.log(JSON.stringify(data));
-            await fetch("http://localhost:5000/login?include_auth_token", {
+            await fetch("http://127.0.0.1:5000/login?include_auth_token", {
                 "method": "POST",
                 "headers": {
                     "Content-Type": "application/json"
@@ -93,9 +93,11 @@ export const useAuthStore = defineStore("Auth", {
                         this.loginErrors = data.response.errors;
                         throw Error("Unable to login");
                     }
+                    console.log("test 1");
                     return data;
                 })
                 .then(data => {
+                    console.log("test 2");
                     this.csrfToken = data.response.csrf_token;
                     this.authenticationToken = data.response.user.authentication_token;
                     this.userId = data.response.user.id;
@@ -106,6 +108,7 @@ export const useAuthStore = defineStore("Auth", {
                     authData.authenticationToken = this.authenticationToken;
                     authData.userId = this.userId;
                     sessionStorage.flashCardAppAuth = JSON.stringify(authData);
+                    console.log("test 3");
                 })
                 .catch(err => {
                 console.error(err);

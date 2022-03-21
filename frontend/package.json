@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@heroicons/vue": "^1.0.6",
+    "@tailwindcss/forms": "^0.5.0",
     "chart.js": "^3.7.1",
     "daisyui": "^2.6.3",
     "pinia": "^2.0.11",

@@ -20,7 +20,7 @@ export const useAppStore = defineStore("App", {
                 this.theme = localStorage.flashCardAppTheme
             }
             else {
-                this.theme = 'dark'
+                this.theme = 'light'
                 localStorage.flashCardAppTheme = this.theme
             }
             const htmlElem = document.getElementsByTagName('html')[0];
