@@ -10,7 +10,8 @@ import AddCard from '@/views/AddCard.vue';
 import { useAuthStore } from '@/stores/AuthStore';
 import UserInfo from '@/views/UserInfo.vue';
 import DeckCards from '@/views/DeckCards.vue';
-
+import DeckReview from '@/views/DeckReview.vue';
+import ExportDeck from '@/views/ExportDeck.vue';
 
 const routes = [
     { path: '/home', name: 'Home', component: Home },
@@ -24,9 +25,11 @@ const routes = [
             { path: 'Dashboard', name: 'Dashboard', component: Dashboard },
             { path: 'decks', name: 'Decks', component: Decks },
             { path: 'decks/:id', name: 'Deck Cards', component: DeckCards },
+            { path: 'review/:id', name: 'Deck Review', component: DeckReview},
             { path: 'userinfo', name: 'UserInfo', component: UserInfo },
             { path: 'add-deck', name: 'Add Deck', component: AddDeck },
             { path: 'add-card', name: 'Add Card', component: AddCard },
+            { path: 'export', name: 'Export Deck', component: ExportDeck }
         ]
     },
     { path: '/login', name: 'Login', component: Login },
@@ -52,6 +55,12 @@ router.beforeEach( (to, from) => {
             path: '/dashboard'
         }
     }
+    else if(to.name == 'Deck Review' && from.name != 'Decks' && from.name != 'Deck Review'){
+        return {
+            path: '/dashboard'
+        }
+    }
+
     return true;
 })
 

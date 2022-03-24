@@ -31,9 +31,10 @@ export default {
       <dt class="text-sm font-medium">Total Score</dt>
       <dd class="mt-1 text-sm sm:mt-0 sm:col-span-2">{{ deck.total_score }}</dd>
     </div>
-    <div class="card-actions justify-center">
+    <div class="card-actions justify-center grid grid-cols-2 grid-rows-2">
       <router-link :to="'/decks/'+deck.deck_id" class="btn btn-xs btn-primary">Cards</router-link>
-      <button class="btn btn-xs btn-info">Review</button>
+      <router-link :to="'/review/'+deck.deck_id" class="btn btn-xs btn-info">Review</router-link>
+      <button class="btn btn-xs btn-warning" @click="UserStore.exportDeck(deck.deck_id)">Export</button>
       <button class="btn btn-xs btn-error" @click="UserStore.deleteDeck(deck.deck_id)">Delete</button>
     </div>
   </div>

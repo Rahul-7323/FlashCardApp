@@ -2,6 +2,7 @@
 import { RouterView } from 'vue-router';
 import { useUserStore } from '@/stores/UserStore';
 import { useAppStore } from '@/stores/AppStore';
+import { useAuthStore } from '@/stores/AuthStore';
 import NavBar from '@/components/NavBar.vue'
 import SideBar from '@/components/SideBar.vue'
 import AppAlertList from '@/components/AppAlertList.vue'
@@ -11,6 +12,8 @@ const UserStore = useUserStore()
 UserStore.fetchData();
 
 const AppStore = useAppStore()
+
+const AuthStore = useAuthStore();
 
 const state = reactive({ screenWidth: window.innerWidth });
 
@@ -27,6 +30,16 @@ onMounted(() => {
                 elem[0].checked = false;
             }
         }
+    })
+
+    const source = AuthStore.eventSource;
+    source.addEventListener('Export', (e) => {
+        const data = JSON.parse(e.data);
+        console.log(data);
+        AppStore.pushAlert({
+            type: 'success',
+            message: data.message
+        })
     })
 })
 

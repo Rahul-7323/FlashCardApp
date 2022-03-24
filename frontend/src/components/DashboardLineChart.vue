@@ -6,6 +6,12 @@ export default {
         chartId: {
             type: String,
             default: 'myChart'
+        },
+        labels: {
+            default: ['January', 'February', 'March', 'April', 'May', 'June', 'July']
+        },
+        data: {
+            default: [65, 59, 80, 81, 56, 55, 40]
         }
     },
     mounted() {
@@ -13,21 +19,22 @@ export default {
         console.log(this.chartId)
         const ctx = document.getElementById(this.chartId).getContext('2d');
 
-        const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+        const labels = this.labels;
 
         const data = {
             labels: labels,
             datasets: [{
-                label: 'My First Dataset',
-                data: [65, 59, 80, 81, 56, 55, 40],
+                label: 'Total Score',
+                data: this.data,
                 fill: false,
+                backgroundColor: 'rgb(75,192,192)',
                 borderColor: 'rgb(75, 192, 192)',
                 tension: 0.1
             }]
         };
 
         const config = {
-            type: 'line',
+            type: 'bar',
             data: data,
             options: {
                 maintainAspectRatio: false,

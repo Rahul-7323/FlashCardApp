@@ -64,7 +64,9 @@ def create_app():
 
 app, api, celery = create_app()
 flask_wtf.CSRFProtect(app)
+
 CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 app.register_blueprint(sse, url_prefix='/stream')
 

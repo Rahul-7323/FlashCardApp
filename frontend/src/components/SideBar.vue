@@ -25,6 +25,7 @@ export default {
                 <SideBarItem link="/decks" name="Decks" />
                 <SideBarItem link="/add-deck" name="Add Deck" />
                 <SideBarItem link="/add-card" name="Add Card" />
+                <SideBarItem link="/export" name="Deck Exports" />
             </div>
         </div>
     </div>

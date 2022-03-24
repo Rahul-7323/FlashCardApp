@@ -33,11 +33,16 @@ def print_current_time():
     result = job.wait()
     return str(result), 200
 
-@app.route('/test_send_message')
-def test_send_message():
-    sse.publish({"message":"Test SSE message from server"}, type='SSE_TEST')
+@app.route('/test_send_message/<id>')
+def test_send_message(id):
+    sse.publish({"message":"Test SSE message from server"}, type='SSE_TEST', channel=id)
     return 'OK',200
 
 @app.route('/test_show_messages')
 def test_show_messages():
     return render_template("sse_show_update.html", error = None)
+
+@app.route('/export_deck/<user_id>/<deck_id>')
+def export_deck(user_id,deck_id):
+    job = tasks.export_deck.delay(user_id,deck_id)
+    return {"job_id":str(job)},200

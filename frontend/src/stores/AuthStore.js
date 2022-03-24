@@ -7,14 +7,19 @@ export const useAuthStore = defineStore("Auth", {
             userId: '',
             authenticationToken: '',
             csrfToken: '',
+            dataFetched: false,
             loginErrors: {},
-            registerErrors: {}
+            registerErrors: {},
+            eventSource: null,
         }
     },
     getters: {
 
     },
     actions: {
+        getEventSource() {
+            this.eventSource = new EventSource(`http://localhost:5000/stream?channel=${this.userId}`);
+        },
         async getCsrfToken(){
             const csrf_token = await fetch("http://localhost:5000/login", {
                         "method": "GET",
@@ -59,6 +64,8 @@ export const useAuthStore = defineStore("Auth", {
                     this.authenticationToken = data.response.user.authentication_token;
                     this.userId = data.response.user.id;
                     this.isAuthenticated = true;
+                    this.dataFetched = true;
+                    this.getEventSource();
 
                     const authData = {}
                     authData.csrfToken = this.csrfToken;
@@ -102,6 +109,8 @@ export const useAuthStore = defineStore("Auth", {
                     this.authenticationToken = data.response.user.authentication_token;
                     this.userId = data.response.user.id;
                     this.isAuthenticated = true;
+                    this.dataFetched = true;
+                    this.getEventSource();
 
                     const authData = {}
                     authData.csrfToken = this.csrfToken;
@@ -143,6 +152,7 @@ export const useAuthStore = defineStore("Auth", {
                 this.authenticationToken = authData.authenticationToken;
                 this.userId = authData.userId;
                 this.isAuthenticated = true;
+                this.getEventSource();
                 return true;
             }
             return false;
