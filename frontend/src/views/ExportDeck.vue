@@ -1,29 +1,33 @@
 <script>
-import { useAuthStore } from '@/stores/AuthStore';
+import { useUserStore } from '@/stores/UserStore';
+import ExportInfo from '@/components/ExportInfo.vue';
 
 export default {
+    components: {
+        ExportInfo
+    },
     setup(){
-        const AuthStore = useAuthStore();
-        return { AuthStore }
+        const UserStore = useUserStore();
+        return { UserStore };
     },
-    data() {
-        return {
-            messages: []
+    computed: {
+        pendingJobs() {
+            return this.UserStore.backend_jobs.filter(job => job.status == 'pending');
+        },
+        succeededJobs() {
+            return this.UserStore.backend_jobs.filter(job => job.status == 'succeeded');
         }
-    },
-    mounted() {
-        const source = this.AuthStore.eventSource;
-        source.addEventListener('SSE_TEST', (e) => {
-            const data = JSON.parse(e.data);
-            this.messages.push(data.message);
-        },false);
     }
 }
 </script>
 
 <template>
-<div class="text-xl">Messages from Flask-SSE</div>
-<ul>
-    <li v-for="message in messages">{{ message }}</li>
-</ul>
+<div class="flex flex-col gap-4">
+<div class="text-xl font-bold">Succeeded Jobs</div>
+<ExportInfo class="cool-shadow" v-for="job in succeededJobs" :job="job" />
+</div>
+<div class="flex flex-col gap-3">
+<div class="text-xl font-bold">Pending Jobs</div>
+<ExportInfo v-for="job in pendingJobs" :job="job" />
+</div>
 </template>

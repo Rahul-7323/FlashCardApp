@@ -18,7 +18,8 @@ from application.api import (
     DeckLastReviewTimeAPI,
     CardDifficultyAPI,
     DeckTotalScoreAPI,
-    UserDataAPI
+    UserDataAPI,
+    WebhookUrlAPI
 )
 
 from flask_security import Security, SQLAlchemySessionUserDatastore
@@ -52,7 +53,9 @@ def create_app():
     # Update celery with the configuration
     celery.conf.update(
         broker_url = app.config["CELERY_BROKER_URL"],
-        result_backend = app.config["CELERY_RESULT_BACKEND"]
+        result_backend = app.config["CELERY_RESULT_BACKEND"],
+        timezone = 'Asia/Kolkata',
+        enable_utc = True
     )
     app.app_context().push()
     
@@ -81,6 +84,7 @@ api.add_resource(CardAPI, "/api/card", "/api/card/<int:card_id>")
 api.add_resource(DeckLastReviewTimeAPI, "/api/deck/update_lrt/<int:deck_id>")
 api.add_resource(CardDifficultyAPI,"/api/card/update_difficulty/<int:card_id>")
 api.add_resource(DeckTotalScoreAPI,"/api/deck/update_ts/<int:deck_id>")
+api.add_resource(WebhookUrlAPI,"/api/update_webhook_url/<int:user_id>")
 
 if __name__ == "__main__":
     app.run(

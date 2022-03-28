@@ -46,3 +46,8 @@ def test_show_messages():
 def export_deck(user_id,deck_id):
     job = tasks.export_deck.delay(user_id,deck_id)
     return {"job_id":str(job)},200
+
+@app.route('/webhook_test/<user_id>')
+def webhook_test(user_id):
+    job = tasks.webhook_test.delay(user_id)
+    return {"job_id":str(job)},200

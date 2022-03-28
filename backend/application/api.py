@@ -18,11 +18,11 @@ import re
 
 regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 
-
 user_fields = {
     "id" : fields.Integer,
     "username" : fields.String,
-    "email" : fields.String
+    "email" : fields.String,
+    "webhook_url": fields.String
 }
 
 deck_fields = {
@@ -43,6 +43,9 @@ card_fields = {
 
 
 # Request Parsers
+webhook_url_parser = reqparse.RequestParser()
+webhook_url_parser.add_argument("webhook_url")
+
 create_deck_parser = reqparse.RequestParser()
 create_deck_parser.add_argument("user_id")
 create_deck_parser.add_argument("deck_name")
@@ -284,6 +287,22 @@ class DeckAPI(Resource):
         deck = Deck.query.filter(and_(Deck.deck_name == deck_name, Deck.user_id == user_id)).one()
         return deck, 201
 
+class WebhookUrlAPI(Resource):
+    @auth_required('token')
+    @marshal_with(user_fields)
+    def put(self,user_id):
+        user = get_user(user_id)
+        args = webhook_url_parser.parse_args()
+        webhook_url = args.get("webhook_url",None)
+        if not webhook_url:
+            raise APIError(
+                status_code=400,
+                error_code="ERR_10",
+                error_message="webhook url is required"
+            )
+        user.webhook_url = webhook_url
+        db.session.commit()
+        return user
 
 class DeckCardsAPI(Resource):
     @auth_required('token')

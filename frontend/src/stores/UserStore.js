@@ -19,16 +19,20 @@ export const useUserStore = defineStore("UserStore", {
         },
     },
     actions: {
-        pushJob(job_id){
-            this.backend_jobs.push({
+        pushJob(job_id,deck_id,deck_name){
+            this.backend_jobs.unshift({
                 job_id: job_id,
-                status: 'pending'
+                deck_id: deck_id,
+                deck_name: deck_name,
+                status: 'pending',
+                url: ''
             })
         },
-        finishedJob(job_id){
+        finishedJob(job_id,url){
             this.backend_jobs.forEach(job => {
                 if(job.job_id == job_id){
-                    job.status = 'succeeded'
+                    job.status = 'succeeded';
+                    job.url = url;
                 }
             })
         },
@@ -205,6 +209,45 @@ export const useUserStore = defineStore("UserStore", {
 
             console.log(data);
         },
+        async updateWebhookUrl(webhook_url){
+            const AppStore = useAppStore();
+            const AuthStore = useAuthStore();
+
+            const data = {
+                webhook_url: webhook_url,
+            }
+
+            await fetch(`http://localhost:5000/api/update_webhook_url/${AuthStore.userId}`, {
+                "method": "PUT",
+                "headers": {
+                    "Authentication-Token": AuthStore.authenticationToken,
+                    "Content-Type": "application/json"
+                },
+                "body": JSON.stringify(data)
+            })
+            .then(resp => {
+                if(parseInt(resp.status) >= 400){
+                    throw Error("Unable to update webhook url");
+                }
+                return resp.json();
+            })
+            .then(data => {
+                this.user.webhook_url = webhook_url;
+                AppStore.pushAlert({
+                    type: 'info',
+                    message: 'Webhook URL Updated'
+                })
+            })
+            .catch(err => {
+                AppStore.pushAlert({
+                    type: 'error',
+                    message: 'Unable to update webhook url'
+                })
+                console.log(err);
+            })
+
+            console.log(data);
+        },
         async deleteCard(card_id){
             const AppStore = useAppStore();
             const AuthStore = useAuthStore();
@@ -285,7 +328,7 @@ export const useUserStore = defineStore("UserStore", {
                 console.error(err);
                 });
         },
-        async exportDeck(deck_id){
+        async exportDeck(deck_id,deck_name){
             const AppStore = useAppStore();
             const AuthStore = useAuthStore();
             await fetch(`http://localhost:5000/export_deck/${AuthStore.userId}/${deck_id}`, {
@@ -303,7 +346,7 @@ export const useUserStore = defineStore("UserStore", {
                 })
                 .then(data => {
                     console.log(data);
-                    this.pushJob(data.job_id);
+                    this.pushJob(data.job_id,deck_id,deck_name);
                     AppStore.pushAlert({
                         type: 'warning',
                         message: `Export deck ${deck_id} job sent to backend`

@@ -13,6 +13,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String, nullable = False)
     active = db.Column(db.Boolean)
     fs_uniquifier = db.Column(db.String(255), unique=True, nullable=False)
+    webhook_url = db.Column(db.String(255),unique=True, nullable=True)
     roles = db.relationship('Role', secondary = roles_users, backref = db.backref('user', lazy = 'dynamic'))
     decks = db.relationship('Deck', backref = 'user', cascade = "all, delete")
 
@@ -20,7 +21,8 @@ class User(db.Model, UserMixin):
         return {
             "id":self.id,
             "username":self.username,
-            "email":self.email
+            "email":self.email,
+            "webhook_url":self.webhook_url
         }
 
 class Role(db.Model, RoleMixin):

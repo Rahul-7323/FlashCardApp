@@ -34,7 +34,7 @@ export default {
     <div class="card-actions justify-center grid grid-cols-2 grid-rows-2">
       <router-link :to="'/decks/'+deck.deck_id" class="btn btn-xs btn-primary">Cards</router-link>
       <router-link :to="'/review/'+deck.deck_id" class="btn btn-xs btn-info">Review</router-link>
-      <button class="btn btn-xs btn-warning" @click="UserStore.exportDeck(deck.deck_id)">Export</button>
+      <button class="btn btn-xs btn-warning" @click="UserStore.exportDeck(deck.deck_id,deck.deck_name)">Export</button>
       <button class="btn btn-xs btn-error" @click="UserStore.deleteDeck(deck.deck_id)">Delete</button>
     </div>
   </div>

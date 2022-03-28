@@ -36,6 +36,7 @@ onMounted(() => {
     source.addEventListener('Export', (e) => {
         const data = JSON.parse(e.data);
         console.log(data);
+        UserStore.finishedJob(data.job_id,data.url);
         AppStore.pushAlert({
             type: 'success',
             message: data.message

@@ -12,6 +12,7 @@ import UserInfo from '@/views/UserInfo.vue';
 import DeckCards from '@/views/DeckCards.vue';
 import DeckReview from '@/views/DeckReview.vue';
 import ExportDeck from '@/views/ExportDeck.vue';
+import UpdateWebhook from '@/views/UpdateWebhook.vue';
 
 const routes = [
     { path: '/home', name: 'Home', component: Home },
@@ -29,7 +30,8 @@ const routes = [
             { path: 'userinfo', name: 'UserInfo', component: UserInfo },
             { path: 'add-deck', name: 'Add Deck', component: AddDeck },
             { path: 'add-card', name: 'Add Card', component: AddCard },
-            { path: 'export', name: 'Export Deck', component: ExportDeck }
+            { path: 'export', name: 'Export Deck', component: ExportDeck },
+            { path: 'update_webhook', name: 'Update Webhook', component: UpdateWebhook }
         ]
     },
     { path: '/login', name: 'Login', component: Login },

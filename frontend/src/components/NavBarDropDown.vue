@@ -1,13 +1,15 @@
 <script setup>
 import { useAuthStore } from '@/stores/AuthStore';
+import { CogIcon } from '@heroicons/vue/outline';
 
 const AuthStore = useAuthStore();
 </script>
 
 <template>
     <div class="dropdown dropdown-end">
-        <label tabindex="0" class="btn btn-ghost btn-circle avatar">
-            <div class="w-10 rounded-full">
+        <label tabindex="0" class="btn btn-ghost btn-circle">
+            <div class="w-10 p-1 rounded-full">
+                <CogIcon/>
             </div>
         </label>
         <ul
@@ -16,6 +18,9 @@ const AuthStore = useAuthStore();
         >
             <li>
                 <router-link to="/userinfo">User Info</router-link>
+            </li>
+            <li>
+                <router-link to="/update_webhook">Update Webhook</router-link>
             </li>
             <li>
                 <router-link to="/login" @click="AuthStore.logout()">Logout</router-link>
