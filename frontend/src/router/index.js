@@ -15,8 +15,7 @@ import ExportDeck from '@/views/ExportDeck.vue';
 import UpdateWebhook from '@/views/UpdateWebhook.vue';
 
 const routes = [
-    { path: '/home', name: 'Home', component: Home },
-    { path: '/', redirect: '/home' },
+    { path: '/', redirect: '/login' },
     {
         path: '/',
         name: 'Page',
@@ -36,7 +35,7 @@ const routes = [
     },
     { path: '/login', name: 'Login', component: Login },
     { path: '/register', name: 'Register', component: Register },
-    { path: '/:pathMatch(.*)*', redirect: '/home' },
+    { path: '/:pathMatch(.*)*', redirect: '/' },
 ];
 
 const router = createRouter({
