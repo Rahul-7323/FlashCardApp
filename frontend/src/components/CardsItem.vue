@@ -6,6 +6,11 @@ export default {
       const UserStore = useUserStore();
       return { UserStore }
     },
+    data() {
+      return {
+        errors: []
+      }
+    },
     props: {
         card: {
             default: {}
@@ -28,6 +33,7 @@ export default {
     <div class="card-actions justify-start">
       <button class="btn btn-xs btn-error" @click="UserStore.deleteCard(card.card_id)">Delete</button>
     </div>
+    <div v-for="error of errors">{{ error }}</div>
   </div>
 </div>
 </template>

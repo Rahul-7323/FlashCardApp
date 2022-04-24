@@ -43,6 +43,7 @@ def export_deck(self,user_id,deck_id):
     for card in deck.cards:
         f.write(card.front+','+card.back+'\n')
     f.close()
+    time.sleep(4)
     print("DECK EXPORT JOB COMPLETE")
     message = "Exported the deck {}".format(deck_id)
     export_url = 'http://localhost:5000/static/files/{}.txt'.format(self.request.id)

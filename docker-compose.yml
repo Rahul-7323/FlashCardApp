@@ -1,20 +1,27 @@
-version: "3.8"
+version: '3.8'
 
 services:
-  flask-app:
-    image: python:3.8-slim-buster
-    command: sh -c "sh setup.sh && sh run.sh"
+  flask:
+    # image: python:3.8-slim-buster
+    # working_dir: /app
+    # command: sh -c "chmod +x ./startup.sh && ./startup.sh"
+    build: ./backend
     ports:
       - 5000:5000
-    working_dir: /app
+    # volumes:
+    #   - ./backend:/app
+    environment:
+      - REDIS_HOST=redis
+  
+  redis:
+    image: redis
     volumes:
-      - ./backend/:/app
-
-  vue-app:
-    image: node:lts-alpine
-    command: sh -c "yarn install && chmod -R 777 ./ && yarn dev"
+      - flashcardapp-redis-data:/data
+  
+  vue:
+    build: ./frontend
     ports:
-      - 3000:3000
-    working_dir: /app
-    volumes:
-      - ./frontend/:/app
+      - 8080:80
+
+volumes:
+  flashcardapp-redis-data:

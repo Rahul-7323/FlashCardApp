@@ -10,7 +10,8 @@ export default {
         return {
             deck_id: null,
             front: '',
-            back: ''
+            back: '',
+            errors: [],
         }
     },
     computed: {
@@ -22,6 +23,7 @@ export default {
         async addCard() {
             if(!this.deck_id){
                 alert("Please select a deck");
+                this.errors.push("please select a deck");
                 return false;
             }
             if(!this.front){
@@ -69,6 +71,7 @@ export default {
                 <p class="mt-2 text-sm text-gray-500">The back portion contains the answer to the question in the front</p>
               </div>
             </div>
+            <div v-for="error in errors">{{ error }}</div>
             <div class="px-4 py-3 bg-gray-50 sm:px-6">
               <button @click="addCard()" class="btn btn-primary py-0">Add Card</button>
             </div>

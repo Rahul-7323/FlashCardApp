@@ -18,10 +18,10 @@ export const useAuthStore = defineStore("Auth", {
     },
     actions: {
         getEventSource() {
-            this.eventSource = new EventSource(`http://localhost:5000/stream?channel=${this.userId}`);
+            this.eventSource = new EventSource(`${import.meta.env.VITE_BACKEND_URL}/stream?channel=${this.userId}`);
         },
         async getCsrfToken(){
-            const csrf_token = await fetch("http://localhost:5000/login", {
+            const csrf_token = await fetch(`${import.meta.env.VITE_BACKEND_URL}/login`, {
                         "method": "GET",
                         "headers": {
                             "Content-Type": "application/json"
@@ -44,7 +44,7 @@ export const useAuthStore = defineStore("Auth", {
                 password: password,
                 csrf_token: this.csrfToken
             };
-            await fetch("http://localhost:5000/register?include_auth_token", {
+            await fetch(`${import.meta.env.VITE_BACKEND_URL}/register?include_auth_token`, {
                 "method": "POST",
                 "headers": {
                     "Content-Type": "application/json"
@@ -87,7 +87,7 @@ export const useAuthStore = defineStore("Auth", {
                 csrf_token: this.csrfToken
             };
             console.log(JSON.stringify(data));
-            await fetch("http://127.0.0.1:5000/login?include_auth_token", {
+            await fetch(`${import.meta.env.VITE_BACKEND_URL}/login?include_auth_token`, {
                 "method": "POST",
                 "headers": {
                     "Content-Type": "application/json"
@@ -124,7 +124,7 @@ export const useAuthStore = defineStore("Auth", {
                 });
         },
         logout() {
-            fetch("http://localhost:5000/logout", {
+            fetch(`${import.meta.env.VITE_BACKEND_URL}/logout`, {
                 "method": "POST",
                 "headers": {
                     "Content-Type": "application/json"

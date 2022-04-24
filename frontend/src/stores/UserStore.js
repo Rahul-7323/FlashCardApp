@@ -41,7 +41,7 @@ export const useUserStore = defineStore("UserStore", {
             const AuthStore = useAuthStore();
             try {
                 this.fetchingData = true;
-                const data = await fetch(`http://localhost:5000/api/user_data/${AuthStore.userId}`, {
+                const data = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user_data/${AuthStore.userId}`, {
                                 "method": "GET",
                                 "headers": {
                                     "Authentication-Token": AuthStore.authenticationToken,
@@ -78,7 +78,7 @@ export const useUserStore = defineStore("UserStore", {
                 console.log("Inside do review");
                 console.log(result);
 
-                await fetch(`http://127.0.0.1:5000/api/deck/update_lrt/${deck_id}`, {
+                await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/deck/update_lrt/${deck_id}`, {
                     "method": "PUT",
                     "headers": {
                         "Authentication-Token": AuthStore.authenticationToken,
@@ -89,7 +89,7 @@ export const useUserStore = defineStore("UserStore", {
                 console.log('update_lrt')
                 let total_points = 0;
                 for(const card of result){
-                    await fetch(`http://127.0.0.1:5000/api/card/update_difficulty/${card.card_id}`, {
+                    await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/card/update_difficulty/${card.card_id}`, {
                         "method": "PUT",
                         "headers": {
                             "Authentication-Token": AuthStore.authenticationToken,
@@ -102,7 +102,7 @@ export const useUserStore = defineStore("UserStore", {
                 let total_score = Math.floor((total_points/(3*result.length))*100);
                 console.log("Total Score " + total_score);
                 console.log('update_difficulty')
-                await fetch(`http://127.0.0.1:5000/api/deck/update_ts/${deck_id}`, {
+                await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/deck/update_ts/${deck_id}`, {
                     "method": "PUT",
                     "headers": {
                         "Authentication-Token": AuthStore.authenticationToken,
@@ -136,7 +136,7 @@ export const useUserStore = defineStore("UserStore", {
                 difficulty: null
             }
 
-            await fetch("http://localhost:5000/api/card", {
+            await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/card`, {
                 "method": "POST",
                 "headers": {
                     "Authentication-Token": AuthStore.authenticationToken,
@@ -178,7 +178,7 @@ export const useUserStore = defineStore("UserStore", {
                 total_score: 0
             }
 
-            await fetch("http://localhost:5000/api/deck", {
+            await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/deck`, {
                 "method": "POST",
                 "headers": {
                     "Authentication-Token": AuthStore.authenticationToken,
@@ -217,7 +217,7 @@ export const useUserStore = defineStore("UserStore", {
                 webhook_url: webhook_url,
             }
 
-            await fetch(`http://localhost:5000/api/update_webhook_url/${AuthStore.userId}`, {
+            await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/update_webhook_url/${AuthStore.userId}`, {
                 "method": "PUT",
                 "headers": {
                     "Authentication-Token": AuthStore.authenticationToken,
@@ -252,7 +252,7 @@ export const useUserStore = defineStore("UserStore", {
             const AppStore = useAppStore();
             const AuthStore = useAuthStore();
         
-            await fetch(`http://localhost:5000/api/card/${card_id}`, {
+            await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/card/${card_id}`, {
                     "method": "DELETE",
                     "headers": {
                         "Authentication-Token": AuthStore.authenticationToken,
@@ -289,7 +289,7 @@ export const useUserStore = defineStore("UserStore", {
             const AppStore = useAppStore();
             const AuthStore = useAuthStore();
         
-            await fetch(`http://localhost:5000/api/deck/${deck_id}`, {
+            await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/deck/${deck_id}`, {
                     "method": "DELETE",
                     "headers": {
                         "Authentication-Token": AuthStore.authenticationToken,
@@ -331,7 +331,7 @@ export const useUserStore = defineStore("UserStore", {
         async exportDeck(deck_id,deck_name){
             const AppStore = useAppStore();
             const AuthStore = useAuthStore();
-            await fetch(`http://localhost:5000/export_deck/${AuthStore.userId}/${deck_id}`, {
+            await fetch(`${import.meta.env.VITE_BACKEND_URL}/export_deck/${AuthStore.userId}/${deck_id}`, {
                     "method": "GET",
                     "headers": {
                         "Authentication-Token": AuthStore.authenticationToken,
