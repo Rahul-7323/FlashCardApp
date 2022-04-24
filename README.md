@@ -38,7 +38,7 @@ system.
 * Redis and Celery were used for implementing task workers, message queues and job scheduling in the backend.
 * Discord webhooks have been used for sending daily remainders.
 * The VueJS ecosystem of frameworks, namely Vue 3, Vue-Router for routing and Pinia for state management were used for building the frontend.
-* Tailwindcss and DaisyUI for styling
+* Tailwindcss and DaisyUI for styling.
 
 <br><br>
 
