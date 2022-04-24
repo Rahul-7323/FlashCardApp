@@ -2,7 +2,7 @@
 
 <div align="center">
   <a href="https://github.com/Rahul-7323/FlashCardApp">
-    <img src="images/FlashCardApp-logos_white.png" alt="Logo" style="width: 400px; height: 100px; object-fit: cover;">
+    <img src="images/FlashCardApp-logos_white.png" alt="Logo" width=500>
   </a>
 
 
