@@ -2,14 +2,9 @@ version: '3.8'
 
 services:
   flask:
-    # image: python:3.8-slim-buster
-    # working_dir: /app
-    # command: sh -c "chmod +x ./startup.sh && ./startup.sh"
     build: ./backend
     ports:
       - 5000:5000
-    # volumes:
-    #   - ./backend:/app
     environment:
       - REDIS_HOST=redis
   
