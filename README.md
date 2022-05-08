@@ -57,7 +57,7 @@ Since I have created a docker-compose.yml file with all the necessary instructio
 docker-compose up -d
 ```
 After a few seconds, you should now be able to access the app at http://localhost:8080
-<br>
+<br><br>
 In order to stop the running application, run the below command
 ```
 docker-compose down
