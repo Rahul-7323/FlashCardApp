@@ -52,7 +52,7 @@ Since this application uses Redis and Celery which are not supported on Windows,
 
 ## Running the application
 
-Since I have created a docker-compose.yml file with all the necessary instructions for the application, starting the application should be fairly simple. Docker will pull all the necessary images and dependencies for running the application so no prior setup is required. Just run the below command in the terminal at the root directory of the project.<br><br>
+Since I have created a docker-compose.yml file with all the necessary instructions for the application, starting the application should be fairly simple. Docker will pull all the necessary images and dependencies for running the application so no prior setup is required. Just run the below command in the terminal at the root directory of the project.
 ```
 docker-compose up -d
 ```
