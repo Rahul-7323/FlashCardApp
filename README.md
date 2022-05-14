@@ -36,6 +36,7 @@ system.
 * Flask-SQLAlchemy and SQLite were used for the Database.
 * Flask-RESTful was used for implementing the RESTful API.
 * Redis and Celery were used for implementing task workers, message queues and job scheduling in the backend.
+* Docker was used in order to containerize the frontend and backend.
 * Discord webhooks have been used for sending daily remainders.
 * The VueJS ecosystem of frameworks, namely Vue 3, Vue-Router for routing and Pinia for state management were used for building the frontend.
 * Tailwindcss and DaisyUI for styling.
