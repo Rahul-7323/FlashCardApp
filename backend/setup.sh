@@ -5,7 +5,7 @@ if [ -d $venv ]; then
     echo "Virtual environment present"
 else
     echo "No virtual environment present, creating one..."
-    pip install venv
+    pip install virtualenv
     python3 -m venv $venv
     echo "Created the virtual environment"
 fi;
