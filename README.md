@@ -41,8 +41,7 @@ system.
 * The VueJS ecosystem of frameworks, namely Vue 3, Vue-Router for routing and Pinia for state management were used for building the frontend.
 * Tailwindcss and DaisyUI for styling.
 
-<br><br>
-
+<br>
 
 ## Getting Started
 
